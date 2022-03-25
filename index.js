@@ -26,6 +26,10 @@ const run = async () => {
     throw new Error("Requires GITHUB_EMAIL");
   }
 
+  // Setup git env
+  exec(`git config user.email "${process.env.GITHUB_EMAIL}"`);
+  exec(`git config user.name "${process.env.GITHUB_NAME}"`);
+
   try {
     message = execSync("git log -n 1 --pretty=format:'%s'").toString();
   } catch (e) {
@@ -38,8 +42,6 @@ const run = async () => {
     if (version != null) {
       console.log(`Tagging next release as: ${version}`);
       exec(`npm version ${version}`);
-      exec(`git config user.email "${process.env.GITHUB_EMAIL}"`);
-      exec(`git config user.name "${process.env.GITHUB_NAME}"`);
       exec(`git push`);
       exec(`git push --tags`);
       console.log("Tagging done");
