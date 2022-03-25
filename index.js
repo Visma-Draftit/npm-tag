@@ -16,19 +16,40 @@ const exec = (str) => {
 
 const run = async () => {
   let message;
-  if (!process.env.GITHUB_TOKEN) {
+  const {
+    GITHUB_ACTOR,
+    GITHUB_TOKEN,
+    GITHUB_REPOSITORY,
+    GITHUB_NAME,
+    GITHUB_EMAIL,
+  } = process.env;
+  if (!GITHUB_TOKEN) {
     throw new Error("Requires GITHUB_TOKEN");
   }
-  if (!process.env.GITHUB_NAME) {
+  if (!GITHUB_NAME) {
     throw new Error("Requires GITHUB_NAME");
   }
-  if (!process.env.GITHUB_EMAIL) {
+  if (!GITHUB_EMAIL) {
     throw new Error("Requires GITHUB_EMAIL");
   }
-
+  if (!GITHUB_ACTOR) {
+    throw new Error("Requires GITHUB_ACTOR");
+  }
+  if (!GITHUB_REPOSITORY) {
+    throw new Error("Requires GITHUB_REPOSITORY");
+  }
+  const REPO_NAME = `https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git`;
+  console.log(
+    `https://${GITHUB_ACTOR}:GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git`
+  );
   // Setup git env
+  exec(`git config http.sslVerify false`);
   exec(`git config user.email "${process.env.GITHUB_EMAIL}"`);
   exec(`git config user.name "${process.env.GITHUB_NAME}"`);
+  exec(`git remote add npm-tag "${REPO_NAME}"`);
+  exec(`git remote --verbose`);
+  exec(`git show-ref`);
+  exec(`git branch --verbose`);
 
   try {
     message = execSync("git log -n 1 --pretty=format:'%s'").toString();
@@ -42,8 +63,8 @@ const run = async () => {
     if (version != null) {
       console.log(`Tagging next release as: ${version}`);
       exec(`npm version ${version}`);
-      exec(`git push`);
-      exec(`git push --tags`);
+      exec(`git push "${REPO_NAME}"`);
+      exec(`git push "${REPO_NAME}" --tags`);
       console.log("Tagging done");
     }
   } else {
