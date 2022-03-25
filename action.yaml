@@ -7,6 +7,12 @@ inputs:
   GITHUB_TOKEN:
     description: 'GITHUB_TOKEN' 
     required: true
+  GITHUB_NAME:
+    description: 'GITHUB_NAME' 
+    required: true
+  GITHUB_EMAIL:
+    description: 'GITHUB_EMAIL' 
+    required: true
   NPM_REGISTRY_URL:
     description: 'NPM_REGISTRY_URL' 
     required: false

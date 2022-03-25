@@ -19,6 +19,12 @@ const run = async () => {
   if (!process.env.GITHUB_TOKEN) {
     throw new Error("Requires GITHUB_TOKEN");
   }
+  if (!process.env.GITHUB_NAME) {
+    throw new Error("Requires GITHUB_NAME");
+  }
+  if (!process.env.GITHUB_EMAIL) {
+    throw new Error("Requires GITHUB_EMAIL");
+  }
 
   try {
     message = execSync("git log -n 1 --pretty=format:'%s'").toString();
@@ -32,6 +38,8 @@ const run = async () => {
     if (version != null) {
       console.log(`Tagging next release as: ${version}`);
       exec(`npm version ${version}`);
+      exec(`git config user.email "${process.env.GITHUB_EMAIL}"`);
+      exec(`git config user.name "${process.env.GITHUB_NAME}"`);
       exec(`git push`);
       exec(`git push --tags`);
       console.log("Tagging done");
