@@ -1,6 +1,6 @@
 #!/bin/node
 /// <reference types="node" />
-const { spawnSync } = require("child_process");
+const { execSync, spawnSync } = require("child_process");
 const { getPackageVersion } = require("./helpers");
 
 const exec = (str) => {
