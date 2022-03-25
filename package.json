@@ -16,9 +16,7 @@
     "url": "https://github.com/Visma-Draftit/npm-tag.git/issues"
   },
   "homepage": "https://github.com/Visma-Draftit/npm-tag.git#readme",
-  "dependencies": {
-    "simple-git": "3.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "17.0.23",
     "vitest": "0.7.11"
