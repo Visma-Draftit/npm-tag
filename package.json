@@ -1,0 +1,26 @@
+{
+  "name": "npm-tag",
+  "version": "1.0.0",
+  "description": "Github action script to just run npm version to create a tag and updating package.json",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Visma-Draftit/npm-tag.git.git"
+  },
+  "keywords": [],
+  "author": "Johan Nilsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Visma-Draftit/npm-tag.git/issues"
+  },
+  "homepage": "https://github.com/Visma-Draftit/npm-tag.git#readme",
+  "dependencies": {
+    "simple-git": "3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.23",
+    "vitest": "0.7.11"
+  }
+}
