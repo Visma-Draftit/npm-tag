@@ -1,6 +1,6 @@
 {
   "name": "npm-tag",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Github action script to just run npm version to create a tag and updating package.json",
   "scripts": {
     "test": "vitest"
