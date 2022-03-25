@@ -12,5 +12,7 @@ Tag the current branch using npm publish.
 ```yaml
 - uses: Visma-Draftit/npm-tag@v2.0.0
   env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: MyToken
+    GITHUB_EMAIL: bob@builder.dev
+    GITHUB_NAME: Bob Builder
 ```
